@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Footer from './components/footer';
+import Header from './components/header';
+import OrderPage from './pages/order';
+import OrderSummary from './pages/orderSummary';
+import { RecoilRoot } from 'recoil';
+import { useParams } from 'react-router-dom';
+import OrderComplete from './pages/orderComplete';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RecoilRoot>
+      <Router>
+        <div className="App">
+          <header>
+            <Header />
+          </header>
+          <section>
+            <Routes>
+              <Route path="/order/:tableId" element={<OrderPage />} />
+              <Route path="/order/summary/:tableId" element={<OrderSummary />} />
+              <Route path="/order/complete/:tableId" element={<OrderComplete />} />
+            </Routes>
+          </section>
+          <footer>
+            <Footer />
+          </footer>
+        </div>
+      </Router>
+    </RecoilRoot>
   );
 }
 
