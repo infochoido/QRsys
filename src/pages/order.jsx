@@ -5,7 +5,7 @@ import OrderSummaryBTN from "../components/orderSummaryBTN";
 import OrderSummary from "./orderSummary";
 import { useRecoilValue, useSetRecoilState } from 'recoil'; 
 import { orderState } from '../state/state';
-import { useState } from 'react'; // useState를 임포트합니다.
+import { useState } from 'react'; 
 
 // 이미지 파일을 import
 import ramenImg from "../menu_image/food_example.jpg"; // 라면 이미지
@@ -25,7 +25,6 @@ const menuItems = [
 ];
 
 export default function OrderPage() {
-    const { tableId } = useParams(); // URL에서 tableId 가져오기
     const orders = useRecoilValue(orderState);
     const setOrders = useSetRecoilState(orderState);
     const isOrderAvailable = orders.length > 0;
@@ -34,24 +33,23 @@ export default function OrderPage() {
     const [showButtons, setShowButtons] = useState(false); 
     const addOrder = (newOrder) => {
         setOrders((prevOrders) => {
-            // 메뉴 이름이 같은 주문을 찾아 수량 업데이트
+            // 메뉴 이름이 같은 주문을 찾아 수량 추가 , 여기서 firestore 추가 
             const existingOrder = prevOrders.find(order => order.name === newOrder.name);
             if (existingOrder) {
-                // 수량을 업데이트합니다.
+                // 수량을 업데이트
                 return prevOrders.map(order => 
                     order.name === newOrder.name 
                     ? { ...order, quantity: order.quantity + newOrder.quantity } 
                     : order
                 );
             }
-            // 기존에 없는 경우 새로운 주문 추가
             return [...prevOrders, newOrder];
         });
     };
 
     return (
         <>
-        <div className={`grid ${showButtons ? 'grid-rows-5' : 'grid-rows-4'} grid-cols-2 gap-4 gap-y-1 p-4 border border-gray-300 rounded-md`}>
+        <div className={`grid ${showButtons ? 'grid-rows-5' : 'grid-rows-4'} grid-cols-2 gap-4 gap-y-1 p-4 border border-gray-300 rounded-md z-50`}>
             {menuItems.map((item, index) => (
                 <div key={index}>
                 <Menu imageSrc={item.src} name={item.name} addOrder={addOrder} />

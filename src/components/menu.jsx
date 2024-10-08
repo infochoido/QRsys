@@ -24,7 +24,7 @@ export default function Menu({ imageSrc, name, addOrder }) {
 
     const handleConfirm = () => {
         if (quantity > 0) {
-            addOrder({ name, quantity }); // 주문을 추가합니다.
+            addOrder({ name, quantity }); // 주문 추가
             setQuantity(0); // 수량 초기화
             setShowButtons(false); // 버튼 숨기기
         }

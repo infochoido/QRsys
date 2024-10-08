@@ -4,7 +4,6 @@ import Header from './components/header';
 import OrderPage from './pages/order';
 import OrderSummary from './pages/orderSummary';
 import { RecoilRoot } from 'recoil';
-import { useParams } from 'react-router-dom';
 import OrderComplete from './pages/orderComplete';
 
 function App() {
@@ -15,14 +14,14 @@ function App() {
           <header>
             <Header />
           </header>
-          <section>
+          <section className='relative z-50'>
             <Routes>
               <Route path="/order/:tableId" element={<OrderPage />} />
               <Route path="/order/summary/:tableId" element={<OrderSummary />} />
               <Route path="/order/complete/:tableId" element={<OrderComplete />} />
             </Routes>
           </section>
-          <footer>
+          <footer className='relative z-0'>
             <Footer />
           </footer>
         </div>

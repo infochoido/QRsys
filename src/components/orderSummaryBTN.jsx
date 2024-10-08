@@ -9,7 +9,7 @@ export default function OrderSummaryBTN() {
     };
 
     return (
-        <button onClick={handleClick} className="bg-blue-500 text-white p-2 rounded-md">
+        <button onClick={handleClick} className="bg-blue-500 text-white p-2 rounded-md z-50">
             장바구니 보기
         </button>
     );
