@@ -21,7 +21,7 @@ export default function OrderSummary() {
             ) : (
                 <p>주문이 없습니다.</p>
             )}
-            <OrderBTN />
+            <OrderBTN /> {/* 주문 버튼 추가 */}
         </div>
     );
 }
