@@ -15,11 +15,13 @@ import sausageImg from "../menu_image/food_example.jpg"; // 소세지 이미지
 
 const menuItems = [
     { src: ramenImg, name: "라면", price: 3000 },
-    { src: kimbapImg, name: "김밥", price: 5000 },
-    { src: tteokbokkiImg, name: "떡볶이", price: 7000 },
-    { src: friedImg, name: "튀김", price: 10000 },
+    { src: kimbapImg, name: "바베큐", price: 5000 },
+    { src: tteokbokkiImg, name: "수육", price: 7000 },
+    { src: friedImg, name: "튀김", price: 100000 },
     { src: udonImg, name: "우동", price: 5500 },
     { src: sausageImg, name: "소세지", price: 2000 },
+    { src: sausageImg, name: "아이스황도", price: 2000 },
+    { src: sausageImg, name: "맥주", price: 2000 },
 ];
 
 export default function OrderPage() {
@@ -31,27 +33,26 @@ export default function OrderPage() {
         setOrders((prevOrders) => {
             const existingOrder = prevOrders.find(order => order.name === newOrder.name);
             if (existingOrder) {
-                // 수량 업데이트
                 return prevOrders.map(order => 
                     order.name === newOrder.name 
                     ? { ...order, quantity: order.quantity + newOrder.quantity } 
                     : order
                 );
             }
-            // 새로운 주문 추가 시 price 포함
             return [...prevOrders, { ...newOrder, price: newOrder.price }];
         });
     };
 
     return (
         <>
-        <div className={`grid ${isOrderAvailable ? 'grid-rows-5' : 'grid-rows-4'} grid-cols-2 gap-4 gap-y-1 p-4 border border-gray-300 rounded-md z-50`}>
+        <div className="flex flex-col gap-4 p-2 border border-gray-300 rounded-md z-50 w-[85%]"> {/* flex로 바꾸고 세로로 정렬 */}
             {menuItems.map((item, index) => (
                 <div key={index}>
                     <Menu imageSrc={item.src} name={item.name} addOrder={addOrder} price={item.price} />
                 </div>
             ))}
 
+            {/* 고정된 장바구니 버튼 */}
             {isOrderAvailable && (
                 <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-999">
                     <OrderSummaryBTN />

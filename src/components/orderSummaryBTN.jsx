@@ -15,8 +15,12 @@ export default function OrderSummaryBTN() {
     };
 
     return (
-        <button onClick={handleClick} className="bg-blue-500 text-white py-2 px-8 rounded-md z-50">
+        <button 
+            onClick={handleClick} 
+            className="bg-blue-500 text-white py-2 px-4 rounded-md shadow-lg hover:shadow-xl hover:bg-blue-600 active:bg-blue-700 focus:ring-2 focus:ring-blue-300 transition-all duration-200 transform hover:scale-105"
+        >
             장바구니 보기 ({uniqueItemsCount})
         </button>
+
     );
 }

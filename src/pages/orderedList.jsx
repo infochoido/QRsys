@@ -36,13 +36,15 @@ export default function OrderedList() {
     }, [tableId]); // tableId가 변경될 때마다 호출
 
     return (
-        <div className="flex flex-col w-screen  items-center min-h-screen gap-2">
+        <div className="flex flex-col w-[85%] min-h-screen gap-2">
             <h2 className="text-2xl font-bold mb-4">주문 내역</h2> 
+            <p>테이블 번호: {tableId}</p>
             {orders.length > 0 ? (
                 orders.map((order, index) => (
                     <>
-                    <div key={index} className="mb-2">
-                        <span>{order.name} ( 수량: {order.quantity} ): {order.price}원 </span>
+                    <div key={index} className="mb-2 border px-2 w-full">
+                        <span className='font-bold'>{order.name} </span>
+                        <span>( 수량: {order.quantity} ): {order.price}원 </span>
                         
                     </div>
                     
