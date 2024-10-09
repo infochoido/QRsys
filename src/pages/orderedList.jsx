@@ -13,6 +13,8 @@ export default function OrderedList() {
         navigate(`/order/${tableId}`)
     }
 
+    const totalPrice = orders.reduce((total, order) => total + (order.price * order.quantity), 0);
+
     useEffect(() => {
         const fetchOrders = async () => {
             try {
@@ -34,18 +36,28 @@ export default function OrderedList() {
     }, [tableId]); // tableId가 변경될 때마다 호출
 
     return (
-        <div>
-            <h2>주문 내역</h2>
+        <div className="flex flex-col w-screen  items-center min-h-screen gap-2">
+            <h2 className="text-2xl font-bold mb-4">주문 내역</h2> 
             {orders.length > 0 ? (
                 orders.map((order, index) => (
-                    <div key={index}>
-                        <span>{order.name}: {order.quantity}</span>
+                    <>
+                    <div key={index} className="mb-2">
+                        <span>{order.name} ( 수량: {order.quantity} ): {order.price}원 </span>
+                        
                     </div>
+                    
+                 </>
                 ))
             ) : (
-                <p>주문 내역이 없습니다.</p>
+                <p className="mb-4">주문 내역이 없습니다.</p>
             )}
-            <button onClick={handleInitialClick} className="bg-blue-500 text-white p-2 rounded-md">처음으로</button>
+            <div className="m-2 text-lg font-bold">
+                    총가격: {totalPrice} 원
+                 </div>
+            <button onClick={handleInitialClick} className="bg-blue-500 text-white p-2 rounded-md">
+                처음으로
+            </button>
         </div>
+
     );
 }

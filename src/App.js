@@ -13,7 +13,7 @@ function App() {
     <RecoilRoot>
       <Router>
         <div className="App">
-          <section className='relative z-50'>
+            <section className=" flex flex-col items-center w-full">
             <Routes>
               <Route path="/order/:tableId" element={<><Header /><OrderPage /></>} />
               <Route path="/order/summary/:tableId" element={<><Header /><OrderSummary /></>} />

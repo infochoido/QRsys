@@ -32,14 +32,15 @@ export default function OrderBTN() {
                     // 기존 주문이 있으면 수량만 증가
                     updatedOrders[existingOrderIndex].quantity += order.quantity;
                 } else {
-                    // 기존 주문이 없으면 새로운 주문 추가
+                    // 기존 주문이 없으면 새로운 주문 추가 (price도 포함)
                     updatedOrders.push({ ...order }); // 객체 복사하여 추가
                 }
             });
 
-            // Firestore에 업데이트된 주문 데이터 저장
+            // Firestore에 업데이트된 주문 데이터 저장 (가격도 포함)
             await setDoc(tableRef, {
                 orders: updatedOrders, // 최종 주문 데이터 추가
+                totalPrice: updatedOrders.reduce((total, order) => total + (order.price * order.quantity), 0), // 총 가격 계산
             });
 
             console.log("주문이 Firestore에 저장되었습니다.");
