@@ -1,6 +1,6 @@
 // src/components/OrderBTN.js
 import { db } from '../firebase'; // Firebase 초기화 파일에서 db 가져오기
-import { collection, doc, setDoc, getDoc } from 'firebase/firestore'; // getDoc 추가
+import { collection, doc, setDoc, getDoc, addDoc } from 'firebase/firestore'; // addDoc 추가
 import { useRecoilValue, useSetRecoilState } from 'recoil'; // useSetRecoilState 추가
 import { orderState } from '../state/state';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ export default function OrderBTN() {
 
     const handleOrderSubmit = async () => {
         try {
-            // Firestore에서 기존 주문 가져오기
+            // Firestore에서 기존 테이블 주문 가져오기
             const tableRef = doc(collection(db, 'tables'), tableId); // 테이블 컬렉션 참조
             const tableDoc = await getDoc(tableRef);
             let existingOrders = [];
@@ -37,10 +37,18 @@ export default function OrderBTN() {
                 }
             });
 
-            // Firestore에 업데이트된 주문 데이터 저장 (가격도 포함)
+            // 1. 테이블별로 주문을 저장 (tables 컬렉션)
             await setDoc(tableRef, {
                 orders: updatedOrders, // 최종 주문 데이터 추가
                 totalPrice: updatedOrders.reduce((total, order) => total + (order.price * order.quantity), 0), // 총 가격 계산
+            });
+
+            // 2. 주문을 순서대로 저장 (ordered 컬렉션)
+            await addDoc(collection(db, 'ordered'), {
+                tableId: tableId, // 테이블 번호 저장
+                orders: [...orders], // 현재 주문 내역 저장
+                totalPrice: orders.reduce((total, order) => total + (order.price * order.quantity), 0), // 총 가격
+                timestamp: new Date() // 주문 시간 기록
             });
 
             console.log("주문이 Firestore에 저장되었습니다.");
