@@ -75,7 +75,7 @@ export default function OrderSummary() {
                 <p className='font-bold'>주문이 없습니다.</p>
             )}
 
-            <button onClick={handleInitialClick} className="bg-blue-500 text-white p-2 rounded-md">
+            <button onClick={handleInitialClick} className="bg-maincolor text-white p-2 rounded-md">
                 뒤로가기
             </button>
         </div>

@@ -60,7 +60,7 @@ export default function OrderBTN() {
     };
 
     return (
-        <button onClick={handleOrderSubmit} className="bg-blue-500 text-white p-2 rounded-md">
+        <button onClick={handleOrderSubmit} className="bg-maincolor text-white p-2 rounded-md">
             주문하기
         </button>
     );

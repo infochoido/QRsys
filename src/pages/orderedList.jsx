@@ -56,7 +56,7 @@ export default function OrderedList() {
             <div className="m-2 text-lg font-bold">
                     총가격: {totalPrice} ₩
                  </div>
-            <button onClick={handleInitialClick} className="bg-blue-500 text-white p-2 rounded-md">
+            <button onClick={handleInitialClick} className="bg-maincolor text-white p-2 rounded-md">
                 처음으로
             </button>
         </div>

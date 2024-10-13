@@ -22,6 +22,7 @@ const menuItems = [
     { src: bbqImg, name: "바베큐", price: 2000 },
     { src: bbqImg, name: "아이스황도", price: 2000 },
     { src: bbqImg, name: "맥주", price: 2000 },
+    { src: bbqImg, name: "직원호출", price: 0 },
 ];
 
 export default function OrderPage() {

@@ -38,7 +38,7 @@ export default function Menu({ imageSrc, name, addOrder, price }) {
 
             {/* 오른쪽 텍스트와 버튼들 */}
             <div className="w-2/3 flex flex-col justify-between pl-4"> {/* 나머지 2/3을 정보에 할당 */}
-                <div className="flex justify-between items-center text-sm"> {/* 메뉴 이름과 가격 */}
+                <div className="flex justify-between items-center text-md"> {/* 메뉴 이름과 가격 */}
                     <span className="font-bold truncate">{name}</span> {/* 메뉴명 */}
                     <span>{price} ₩</span> {/* 가격 */}
                 </div>
@@ -49,11 +49,11 @@ export default function Menu({ imageSrc, name, addOrder, price }) {
                     {showButtons ? (
                         <>
                             <button onClick={decreaseQuantity} className="bg-gray-200 text-sm px-2 py-1 rounded-md">-</button>
-                            <button onClick={handleConfirm} className="bg-blue-500 text-white text-sm px-2 py-1 rounded-md">확인</button>
+                            <button onClick={handleConfirm} className="bg-maincolor text-white text-sm px-2 py-1 rounded-md">확인</button>
                             <button onClick={increaseQuantity} className="bg-gray-200 text-sm px-2 py-1 rounded-md">+</button>
                         </>
                     ) : (
-                        <button onClick={toggleButtons} className="bg-blue-500 text-white text-sm px-2 py-1 rounded-md">
+                        <button onClick={toggleButtons} className="bg-maincolor text-white text-sm px-2 py-1 rounded-md">
                             담기
                         </button>
                     )}
