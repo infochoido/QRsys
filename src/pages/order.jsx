@@ -1,68 +1,93 @@
+import { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase'; // Firestore instance
 import { useParams } from 'react-router-dom';
 import Menu from "../components/menu";
 import OrderSummaryBTN from "../components/orderSummaryBTN";
-import { useRecoilValue, useSetRecoilState } from 'recoil'; 
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { orderState } from '../state/state';
-import { useState } from 'react'; 
 
-// 이미지 파일을 import
+// Image imports
 import ramenImg from "../menu_image/food_example.jpg"; // 라면 이미지
-import kimbapImg from "../menu_image/food_example.jpg"; // 김밥 이미지
-import tteokbokkiImg from "../menu_image/food_example.jpg"; // 떡볶이 이미지
-import friedImg from "../menu_image/food_example.jpg"; // 튀김 이미지
-import udonImg from "../menu_image/food_example.jpg"; // 우동 이미지
-import bbqImg from "../menu_image/bbq_image.jpg"; // 바베큐 이미지
+import peachImg from "../menu_image/food_example.jpg"; // 김밥 이미지
+import corncheezeImg from "../menu_image/food_example.jpg"; // 떡볶이 이미지
+import spicyporkImg from "../menu_image/food_example.jpg"; // 튀김 이미지
+import boiledporkImg from "../menu_image/food_example.jpg"; // 우동 이미지
+import odenImg from "../menu_image/bbq_image.jpg"; // 바베큐 이미지
+import bobImg from "../menu_image/bbq_image.jpg"; // 바베큐 이미지
 
-const menuItems = [
-    { src: ramenImg, name: "라면", price: 3000 },
-    { src: kimbapImg, name: "김밥", price: 5000 },
-    { src: tteokbokkiImg, name: "수육", price: 7000 },
-    { src: friedImg, name: "튀김", price: 100000 },
-    { src: udonImg, name: "우동", price: 5500 },
-    { src: bbqImg, name: "바베큐", price: 2000 },
-    { src: bbqImg, name: "아이스황도", price: 2000 },
-    { src: bbqImg, name: "맥주", price: 2000 },
-    { src: bbqImg, name: "직원호출", price: 0 },
-];
+// Image mapping object
+const imageMapping = {
+  ramenImg: ramenImg,
+  peachImg: peachImg,
+  corncheezeImg: corncheezeImg,
+  spicyporkImg: spicyporkImg,
+  boiledporkImg: boiledporkImg,
+  odenImg: odenImg,
+  bobImg: bobImg,
+};
 
 export default function OrderPage() {
-    const orders = useRecoilValue(orderState);
-    const setOrders = useSetRecoilState(orderState);
-    const { tableId } = useParams();
-    const isOrderAvailable = orders.length > 0;
+  const [menuItems, setMenuItems] = useState([]);
+  const orders = useRecoilValue(orderState);
+  const setOrders = useSetRecoilState(orderState);
+  const { tableId } = useParams();
+  const isOrderAvailable = orders.length > 0;
 
-    const addOrder = (newOrder) => {
-        setOrders((prevOrders) => {
-            const existingOrder = prevOrders.find(order => order.name === newOrder.name);
-            if (existingOrder) {
-                return prevOrders.map(order => 
-                    order.name === newOrder.name 
-                    ? { ...order, quantity: order.quantity + newOrder.quantity } 
-                    : order
-                );
-            }
-            return [...prevOrders, { ...newOrder, price: newOrder.price }];
-        });
+  useEffect(() => {
+    // Firestore에서 menuItems 컬렉션 가져오기
+    const fetchMenuItems = async () => {
+      const querySnapshot = await getDocs(collection(db, "menuItems"));
+      const items = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      
+      // 메뉴 아이템의 src를 이미지 파일로 매칭
+      const menuWithImages = items.map(item => ({
+        ...item,
+        imageSrc: imageMapping[item.src], // src 필드를 이용해 이미지 매칭
+      }));
+      
+      setMenuItems(menuWithImages);
     };
-    
 
-    return (
-        <>
-        <p className='my-2 w-[85%]'>테이블 번호: {tableId} </p>
-        <div className="flex flex-col gap-4 p-2 border border-gray-300 rounded-md z-50 w-[85%]"> {/* flex로 바꾸고 세로로 정렬 */}
-            {menuItems.map((item, index) => (
-                <div key={index} >
-                    <Menu imageSrc={item.src} name={item.name} addOrder={addOrder} price={item.price} />
-                </div>
-            ))}
+    fetchMenuItems();
+  }, []);
 
-            {/* 고정된 장바구니 버튼 */}
-            {isOrderAvailable && (
-                <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-999">
-                    <OrderSummaryBTN />
-                </div>
-            )}
-        </div>
-        </>
-    );
+  const addOrder = (newOrder) => {
+    setOrders((prevOrders) => {
+      const existingOrder = prevOrders.find(order => order.name === newOrder.name);
+      if (existingOrder) {
+        return prevOrders.map(order =>
+          order.name === newOrder.name
+            ? { ...order, quantity: order.quantity + newOrder.quantity }
+            : order
+        );
+      }
+      return [...prevOrders, { ...newOrder, price: newOrder.price }];
+    });
+  };
+
+  return (
+    <>
+      <p className='my-2 w-[85%]'>테이블 번호: {tableId} </p>
+      <div className="flex flex-col gap-4 p-2 border border-gray-300 rounded-md z-50 w-[85%]">
+        {menuItems.map((item, index) => (
+          <div key={index}>
+            <Menu
+              imageSrc={item.imageSrc}
+              name={item.name}
+              addOrder={addOrder}
+              price={item.price}
+              available={item.available} 
+            />
+          </div>
+        ))}
+
+        {isOrderAvailable && (
+          <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-999">
+            <OrderSummaryBTN />
+          </div>
+        )}
+      </div>
+    </>
+  );
 }

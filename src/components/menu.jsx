@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Menu({ imageSrc, name, addOrder, price }) {
+export default function Menu({ imageSrc, name, addOrder, price, available }) {
     const [showButtons, setShowButtons] = useState(false);
     const [quantity, setQuantity] = useState(0);
 
@@ -30,34 +30,39 @@ export default function Menu({ imageSrc, name, addOrder, price }) {
     };
 
     return (
-        <div className="flex items-center p-2 border border-gray-300 rounded-md"> {/* flex로 레이아웃 설정 */}
+        <div className="flex items-center p-2 border border-gray-300 rounded-md">
             {/* 왼쪽 이미지 */}
-            <div className="w-1/3"> {/* 이미지를 왼쪽에 배치, 너비 1/3 할당 */}
+            <div className="w-1/3">
                 <img src={imageSrc} alt={name} className="w-full h-full rounded-md" />
             </div>
 
             {/* 오른쪽 텍스트와 버튼들 */}
-            <div className="w-2/3 flex flex-col justify-between pl-4"> {/* 나머지 2/3을 정보에 할당 */}
-                <div className="flex justify-between items-center text-md"> {/* 메뉴 이름과 가격 */}
-                    <span className="font-bold truncate">{name}</span> {/* 메뉴명 */}
-                    <span>{price} ₩</span> {/* 가격 */}
+            <div className="w-2/3 flex flex-col justify-between pl-4">
+                <div className="flex justify-between items-center text-md">
+                    <span className="font-bold truncate">{name}</span>
+                    <span>{price} ₩</span>
                 </div>
 
-                {showButtons && <span className="text-sm mt-2">주문 수량: {quantity}</span>} {/* 주문 수량 */}
-
-                <div className="flex justify-between items-center mt-2"> {/* 수량 버튼 */}
-                    {showButtons ? (
-                        <>
-                            <button onClick={decreaseQuantity} className="bg-gray-200 text-sm px-2 py-1 rounded-md">-</button>
-                            <button onClick={handleConfirm} className="bg-maincolor text-white text-sm px-2 py-1 rounded-md">확인</button>
-                            <button onClick={increaseQuantity} className="bg-gray-200 text-sm px-2 py-1 rounded-md">+</button>
-                        </>
-                    ) : (
-                        <button onClick={toggleButtons} className="bg-maincolor text-white text-sm px-2 py-1 rounded-md">
-                            담기
-                        </button>
-                    )}
-                </div>
+                {available ? (
+                    <>
+                        {showButtons && <span className="text-sm mt-2">주문 수량: {quantity}</span>}
+                        <div className="flex justify-between items-center mt-2">
+                            {showButtons ? (
+                                <>
+                                    <button onClick={decreaseQuantity} className="bg-gray-200 text-sm px-2 py-1 rounded-md">-</button>
+                                    <button onClick={handleConfirm} className="bg-maincolor text-white text-sm px-2 py-1 rounded-md">확인</button>
+                                    <button onClick={increaseQuantity} className="bg-gray-200 text-sm px-2 py-1 rounded-md">+</button>
+                                </>
+                            ) : (
+                                <button onClick={toggleButtons} className="bg-maincolor text-white text-sm px-2 py-1 rounded-md">
+                                    담기
+                                </button>
+                            )}
+                        </div>
+                    </>
+                ) : (
+                    <div className="text-red-500 mt-2 font-semibold">Sold Out</div>
+                )}
             </div>
         </div>
     );
