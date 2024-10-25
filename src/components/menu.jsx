@@ -32,15 +32,15 @@ export default function Menu({ imageSrc, name, addOrder, price, available }) {
     return (
         <div className="flex items-center p-2 border border-gray-300 rounded-md h-28">
             {/* 왼쪽 이미지 */}
-            <div className="w-1/3">
-                <img src={imageSrc} alt={name} className="w-full h-full rounded-md" />
+            <div className="w-1/3 p-3">
+                <img src={imageSrc} alt={name} className="w-full h-full  object-cover rounded-md" />
             </div>
 
             {/* 오른쪽 텍스트와 버튼들 */}
             <div className="w-2/3 flex flex-col justify-between pl-4">
                 <div className="justify-between items-center text-md">
-                    <p className="font-bold text-[12px] w-28">{name}</p>
-                    <p className="text-[11px]">{price} 장</p>
+                    <p className="font-bold text-[12px] w-34">{name}</p>
+                    <p className="text-[12px]">{price} 장</p>
                 </div>
 
                 {available ? (

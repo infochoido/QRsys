@@ -11,7 +11,7 @@ export default function Header() {
    
 
     return (
-        <div className="flex flex-row justify-around items-center w-screen p-4 shadow-lg mb-4">
+        <div className="flex flex-row justify-between items-center w-screen p-4 px-6 shadow-lg mb-4">
             <button onClick={goToHome} className=" font-black text-xl">
                 <img src={logo} alt="logo" className='w-24' />
             </button>

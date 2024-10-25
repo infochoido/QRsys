@@ -71,7 +71,7 @@ export default function OrderPage() {
   return (
     <>
       <p className='my-2 w-[90%]'>테이블 번호: {tableId} </p>
-      <div className="grid grid-cols-2 gap-4 p-1 border border-gray-300 rounded-md z-50 w-[95%]">
+      <div className="flex flex-col gap-4 p-2 border border-gray-300 rounded-md z-50 w-[90%]">
         {menuItems.map((item, index) => (
           <div key={index}>
             <Menu
