@@ -49,12 +49,12 @@ export default function Menu({ imageSrc, name, addOrder, price, available }) {
                         <div className="flex justify-between items-center">
                             {showButtons ? (
                                 <>
-                                    <button onClick={decreaseQuantity} className="bg-gray-200 text-sm px-2 py-1 rounded-md">-</button>
-                                    <button onClick={handleConfirm} className="bg-maincolor text-white text-sm px-2 py-1 rounded-md">확인</button>
-                                    <button onClick={increaseQuantity} className="bg-gray-200 text-sm px-2 py-1 rounded-md">+</button>
+                                    <button onClick={decreaseQuantity} className="bg-gray-200 text-xs px-2 py-1 rounded-md">-</button>
+                                    <button onClick={handleConfirm} className="bg-maincolor text-white text-xs px-2 py-1 rounded-md">확인</button>
+                                    <button onClick={increaseQuantity} className="bg-gray-200 text-xs px-2 py-1 rounded-md">+</button>
                                 </>
                             ) : (
-                                <button onClick={toggleButtons} className="bg-maincolor text-white text-sm px-2 py-1 rounded-md">
+                                <button onClick={toggleButtons} className="bg-maincolor text-white text-xs px-2 py-1  rounded-md">
                                     담기
                                 </button>
                             )}
