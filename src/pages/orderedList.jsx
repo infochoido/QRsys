@@ -44,7 +44,7 @@ export default function OrderedList() {
                     <>
                     <div key={index} className="mb-2 border px-2 w-full">
                         <span className='font-bold'>{order.name} </span>
-                        <span>( 수량: {order.quantity} ): {order.price} ₩ </span>
+                        <span>( 수량: {order.quantity} ): {order.price} 장 </span>
                         
                     </div>
                     
@@ -54,7 +54,7 @@ export default function OrderedList() {
                 <p className="mb-4">주문 내역이 없습니다.</p>
             )}
             <div className="m-2 text-lg font-bold">
-                    총가격: {totalPrice} ₩
+                    총가격: {totalPrice} 장
                  </div>
             <button onClick={handleInitialClick} className="bg-maincolor text-white p-2 rounded-md">
                 처음으로

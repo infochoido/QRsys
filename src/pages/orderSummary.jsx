@@ -47,7 +47,7 @@ export default function OrderSummary() {
                         <div key={index} className="flex justify-between items-center border px-2">
                             <div>
                                 <span>{order.name} ( 수량 {order.quantity} ) </span>
-                                <span> : {order.price * order.quantity} ₩</span> {/* 메뉴별 가격 표시 */}
+                                <span> : {order.price * order.quantity} 장</span> {/* 메뉴별 가격 표시 */}
                             </div>
                             <div className="flex gap-2 mx-2">
                                 <button 
@@ -66,7 +66,7 @@ export default function OrderSummary() {
                         </div>
                     ))}
                     <div className="m-2 text-lg font-bold">
-                        총가격: {totalPrice} ₩
+                        총가격: {totalPrice} 장
                     </div>
                     {/* 주문하기 버튼, 주문이 있을 경우에만 표시 */}
                     <OrderBTN />

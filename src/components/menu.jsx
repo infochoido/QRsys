@@ -30,7 +30,7 @@ export default function Menu({ imageSrc, name, addOrder, price, available }) {
     };
 
     return (
-        <div className="flex items-center p-2 border border-gray-300 rounded-md">
+        <div className="flex items-center p-2 border border-gray-300 rounded-md h-28">
             {/* 왼쪽 이미지 */}
             <div className="w-1/3">
                 <img src={imageSrc} alt={name} className="w-full h-full rounded-md" />
@@ -38,14 +38,14 @@ export default function Menu({ imageSrc, name, addOrder, price, available }) {
 
             {/* 오른쪽 텍스트와 버튼들 */}
             <div className="w-2/3 flex flex-col justify-between pl-4">
-                <div className="flex justify-between items-center text-md">
-                    <span className="font-bold truncate">{name}</span>
-                    <span>{price} ₩</span>
+                <div className="justify-between items-center text-md">
+                    <p className="font-bold text-[12px] w-28">{name}</p>
+                    <p className="text-[11px]">{price} 장</p>
                 </div>
 
                 {available ? (
                     <>
-                        {showButtons && <span className="text-sm mt-2">주문 수량: {quantity}</span>}
+                        {showButtons && <span className="text-xs mt-2">주문 수량: {quantity}</span>}
                         <div className="flex justify-between items-center mt-2">
                             {showButtons ? (
                                 <>

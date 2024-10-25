@@ -8,13 +8,14 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { orderState } from '../state/state';
 
 // Image imports
-import ramenImg from "../menu_image/food_example.jpg"; // 라면 이미지
-import peachImg from "../menu_image/food_example.jpg"; // 김밥 이미지
-import corncheezeImg from "../menu_image/food_example.jpg"; // 떡볶이 이미지
-import spicyporkImg from "../menu_image/food_example.jpg"; // 튀김 이미지
-import boiledporkImg from "../menu_image/food_example.jpg"; // 우동 이미지
-import odenImg from "../menu_image/bbq_image.jpg"; // 바베큐 이미지
-import bobImg from "../menu_image/bbq_image.jpg"; // 바베큐 이미지
+import ramenImg from "../menu_image/ramenImg.jpg"; // 라면 이미지
+import peachImg from "../menu_image/peachImg.jpg"; // 김밥 이미지
+import corncheezeImg from "../menu_image/corncheezeImg.jpg"; // 떡볶이 이미지
+import spicyporkImg from "../menu_image/spicyporkImg.jpg"; // 튀김 이미지
+import boiledporkImg from "../menu_image/boiledporkImg.jpg"; // 우동 이미지
+import odenImg from "../menu_image/odenImg.jpg"; // 도전요리왕 3권 18장 "어묵탕"
+import bobImg from "../menu_image/bobImg.jpg"; // 유비빔의 참치마요 비빔컵밥
+import staffImg from "../menu_image/staffImg.jpg"; // 직원호출
 
 // Image mapping object
 const imageMapping = {
@@ -25,6 +26,7 @@ const imageMapping = {
   boiledporkImg: boiledporkImg,
   odenImg: odenImg,
   bobImg: bobImg,
+  staffImg: staffImg,
 };
 
 export default function OrderPage() {
@@ -68,8 +70,8 @@ export default function OrderPage() {
 
   return (
     <>
-      <p className='my-2 w-[85%]'>테이블 번호: {tableId} </p>
-      <div className="flex flex-col gap-4 p-2 border border-gray-300 rounded-md z-50 w-[85%]">
+      <p className='my-2 w-[90%]'>테이블 번호: {tableId} </p>
+      <div className="grid grid-cols-2 gap-4 p-1 border border-gray-300 rounded-md z-50 w-[95%]">
         {menuItems.map((item, index) => (
           <div key={index}>
             <Menu
