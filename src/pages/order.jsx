@@ -15,7 +15,7 @@ import spicyporkImg from "../menu_image/spicyporkImg.jpg"; // 튀김 이미지
 import boiledporkImg from "../menu_image/boiledporkImg.jpg"; // 우동 이미지
 import odenImg from "../menu_image/odenImg.jpg"; // 도전요리왕 3권 18장 "어묵탕"
 import bobImg from "../menu_image/bobImg.jpg"; // 유비빔의 참치마요 비빔컵밥
-import staffImg from "../menu_image/staffImg.jpg"; // 직원호출
+import staffImg from "../menu_image/staffImg.jpg";
 
 // Image mapping object
 const imageMapping = {
@@ -24,9 +24,10 @@ const imageMapping = {
   corncheezeImg: corncheezeImg,
   spicyporkImg: spicyporkImg,
   boiledporkImg: boiledporkImg,
+  staffImg: staffImg,
   odenImg: odenImg,
   bobImg: bobImg,
-  staffImg: staffImg,
+  
 };
 
 export default function OrderPage() {

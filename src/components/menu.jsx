@@ -33,7 +33,7 @@ export default function Menu({ imageSrc, name, addOrder, price, available }) {
         <div className="flex items-center p-2 border border-gray-300 rounded-md h-28">
             {/* 왼쪽 이미지 */}
             <div className="w-1/3 p-3">
-                <img src={imageSrc} alt={name} className="w-full h-full  object-cover rounded-md" />
+                <img src={imageSrc} alt={name} className="w-full h-full  rounded-md" />
             </div>
 
             {/* 오른쪽 텍스트와 버튼들 */}
