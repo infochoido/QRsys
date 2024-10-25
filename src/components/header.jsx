@@ -13,7 +13,7 @@ export default function Header() {
     return (
         <div className="flex flex-row justify-between items-center w-screen p-4 px-6 shadow-lg mb-4">
             <button onClick={goToHome} className=" font-black text-xl">
-                <img src={logo} alt="logo" className='w-32' />
+                <img src={logo} alt="logo" className='w-[170px]' />
             </button>
             <Link to={`/order/ordered/${tableId}`} className="cursor-pointer">
                 주문내역
