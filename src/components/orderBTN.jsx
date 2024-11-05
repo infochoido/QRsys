@@ -15,6 +15,11 @@ export default function OrderBTN() {
             // Filter only available items
             const availableOrders = orders.filter(order => order.available);
 
+            if (availableOrders.length === 0) {
+                alert("선택한 메뉴 중 주문 가능한 항목이 없습니다.");
+                console.log(availableOrders)
+                return;
+            }
 
             // Firestore에서 기존 테이블 주문 가져오기
             const tableRef = doc(collection(db, 'tables'), tableId); // 테이블 컬렉션 참조
@@ -54,7 +59,7 @@ export default function OrderBTN() {
                 timestamp: new Date() // 주문 시간 기록
             });
 
-            console.log("주문이 Firestore에 저장되었습니다.");
+            console.log("주문이 Firestore에 저장되었습니다.", updatedOrders);
             setOrders([]); // 주문이 완료된 후 상태를 비웁니다.
             navigate(`/order/complete/${tableId}`);
         } catch (error) {

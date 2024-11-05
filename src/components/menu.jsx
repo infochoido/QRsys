@@ -57,6 +57,10 @@ export default function Menu({ imageSrc, name, addOrder, price, available }) {
                                 <button onClick={toggleButtons} className="bg-maincolor text-white text-xs px-2 py-1  rounded-md">
                                     담기
                                 </button>
+                                
+                                
+
+
                             )}
                         </div>
                     </>

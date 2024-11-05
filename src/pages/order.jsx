@@ -42,7 +42,6 @@ export default function OrderPage() {
     const fetchMenuItems = async () => {
       const querySnapshot = await getDocs(collection(db, "menuItems"));
       const items = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      
       // 메뉴 아이템의 src를 이미지 파일로 매칭
       const menuWithImages = items.map(item => ({
         ...item,
@@ -57,17 +56,19 @@ export default function OrderPage() {
 
   const addOrder = (newOrder) => {
     setOrders((prevOrders) => {
-      const existingOrder = prevOrders.find(order => order.name === newOrder.name);
-      if (existingOrder) {
-        return prevOrders.map(order =>
-          order.name === newOrder.name
-            ? { ...order, quantity: order.quantity + newOrder.quantity }
-            : order
-        );
-      }
-      return [...prevOrders, { ...newOrder, price: newOrder.price }];
+        const existingOrder = prevOrders.find(order => order.name === newOrder.name);
+        if (existingOrder) {
+            return prevOrders.map(order =>
+                order.name === newOrder.name
+                    ? { ...order, quantity: order.quantity + newOrder.quantity }
+                    : order
+            );
+        }
+        // 주문 항목에 available 필드를 추가
+        return [...prevOrders, { ...newOrder, price: newOrder.price, available: newOrder.available ?? true }];
+
     });
-  };
+};
 
   return (
     <>
