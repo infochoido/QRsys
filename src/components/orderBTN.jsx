@@ -12,13 +12,8 @@ export default function OrderBTN() {
 
     const handleOrderSubmit = async () => {
         try {
-            // Filter only available items
-            const availableOrders = orders.filter(order => order.available);
-
-            if (availableOrders.length === 0) {
-                alert("품절된 항목이 있습니다. 다시 주문해주세요.");
-                return;
-            }
+           
+            
 
             // Firestore에서 기존 테이블 주문 가져오기
             const tableRef = doc(collection(db, 'tables'), tableId); // 테이블 컬렉션 참조
